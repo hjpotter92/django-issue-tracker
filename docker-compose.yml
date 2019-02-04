@@ -1,0 +1,13 @@
+version: '3.6'
+
+services:
+  web:
+    build: .
+    working_dir: /opt/app
+    env_file:
+      - .env
+    volumes:
+      - .:/opt/app
+    ports:
+      - "4000:8000"
+    restart: always
