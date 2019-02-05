@@ -49,11 +49,35 @@ The default admin user is created everytime the docker image gets built. The cre
 
 ## cURL/httpie
 
+### Register
+
 Register a new user from cli as:
 
     ➜ http :4000/api/v1/auth/register/ \
         username=new email=valid@where.com \
         password1=nowordpass password2=nowordpass
+
+or
+
+    curl --header 'Content-Type: application/json' \
+    --data '{"email":"valid@where.com", "password1":"nowordpass", \
+        "password2":"nowordpass", "username":"new"}' \
+        'http://localhost:4000/api/v1/auth/register/'
+
+### Login
+
+Login as:
+
+    ➜ http :4000/api/v1/auth/login/ username=h password=1
+
+After successful auth requests, a `key` is sent back. This is used as
+authorization header for future requests. For eg. a response like
+
+    {"key": "62281424da9393cc844a95c8e3eacd8571baf725"}
+
+would follow up with a header like
+
+    Authorization: Token 62281424da9393cc844a95c8e3eacd8571baf725
 
 ---
 
